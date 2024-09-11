@@ -3,6 +3,8 @@ package com.example.csci318.hotelbooking.model;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.*;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -20,7 +22,8 @@ public class Hotel {
 
     @OneToMany(mappedBy = "hotel", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference  // This prevents the infinite recursion
-    private List<Room> rooms;
+    private List<Room> rooms; // create a list of rooms
+    private List<Long> availableRooms = new ArrayList<>(); // create a list of available rooms
 
     // Constructors, Getters, and Setters
 
@@ -78,6 +81,14 @@ public class Hotel {
         return rooms;
     }
 
+    public List<Long> getAvailableRooms(){
+        return availableRooms;
+    }
+
+    public void addAvailableRoom(Long roomId){
+        availableRooms.add(roomId);
+    }
+
     public void setRooms(List<Room> rooms) {
         this.rooms = rooms;
     }
@@ -106,7 +117,8 @@ public class Hotel {
                 ", name='" + name + '\'' +
                 ", location='" + location + '\'' +
                 ", description='" + description + '\'' +
-                ", pricePerNight=" + pricePerNight +
+                ", pricePerNight=" + pricePerNight + '\'' +
+                ", availableRoom=" + availableRooms.toString() +
                 '}';
     }
 }

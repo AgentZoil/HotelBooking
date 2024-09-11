@@ -1,12 +1,14 @@
 package com.example.csci318.hotelbooking.controller;
 
 import com.example.csci318.hotelbooking.model.Hotel;
+import com.example.csci318.hotelbooking.model.Room;
 import com.example.csci318.hotelbooking.service.HotelService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/hotels")
@@ -44,5 +46,14 @@ public class HotelController {
         return hotelService.deleteHotel(id)
                 .map(hotel -> ResponseEntity.ok().<Void>build())
                 .orElse(ResponseEntity.notFound().build());
+    }
+
+    @GetMapping("/{id}/availableRooms")
+    List<Room> availableRoom(@PathVariable long id){
+        return hotelService.getAvailableRooms(id)
+                .stream()
+                .map(room -> {
+                    return room;
+                }).collect(Collectors.toList());
     }
 }
