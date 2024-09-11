@@ -18,7 +18,7 @@ public class Room {
     private boolean availability;
 
     @ManyToOne
-    @JoinColumn(name = "hotel_id", nullable = false)
+//    @JoinColumn(name = "hotel_id", nullable = false)
     @JsonBackReference  // This prevents the infinite recursion
     private Hotel hotel;
 
@@ -26,6 +26,14 @@ public class Room {
 
     public Room() {
     }
+
+//    public Room(String roomNumber, String type, double price, boolean availability, Hotel hotel) {
+//        this.roomNumber = roomNumber;
+//        this.type = type;
+//        this.price = price;
+//        this.availability = availability;
+//        this.hotel = hotel;
+//    }
 
     public Room(String roomNumber, String type, double price, boolean availability, Hotel hotel) {
         this.roomNumber = roomNumber;
@@ -102,6 +110,17 @@ public class Room {
     }
 
     @Override
+//    public String toString() {
+//        return "Room{" +
+//                "roomID=" + id +
+//                ", roomNumber='" + roomNumber + '\'' +
+//                ", type='" + type + '\'' +
+//                ", price=" + price +
+//                ", availability=" + availability +
+//                ", hotel=" + hotel.getName() +  // Avoid printing the entire hotel object to prevent recursion
+//                '}';
+//    }
+
     public String toString() {
         return "Room{" +
                 "roomID=" + id +
@@ -109,7 +128,6 @@ public class Room {
                 ", type='" + type + '\'' +
                 ", price=" + price +
                 ", availability=" + availability +
-                ", hotel=" + hotel.getName() +  // Avoid printing the entire hotel object to prevent recursion
                 '}';
     }
 }

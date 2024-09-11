@@ -1,18 +1,28 @@
 package com.example.csci318.hotelbooking.service;
 
 import com.example.csci318.hotelbooking.model.Hotel;
+import com.example.csci318.hotelbooking.model.Room;
 import com.example.csci318.hotelbooking.repository.HotelRepository;
+import org.apache.tomcat.jni.Library;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 @Service
 public class HotelService {
 
-    @Autowired
-    private HotelRepository hotelRepository;
+    private final HotelRepository hotelRepository;
+    private final RestTemplate restTemplate;
+
+    HotelService(HotelRepository hotelRepository, RestTemplate restTemplate){
+        this.hotelRepository = hotelRepository;
+        this.restTemplate = restTemplate;
+    }
 
     // Get all hotels
     public List<Hotel> getAllHotels() {
@@ -41,10 +51,22 @@ public class HotelService {
     }
 
     // Delete a hotel
-    public Optional<Void> deleteHotel(Long id) {
+    public Optional<Void> deleteHotel(Long id){
         return hotelRepository.findById(id).map(hotel -> {
             hotelRepository.delete(hotel);
             return null;
         });
+    }
+
+//     Get available rooms
+    public List<Room> getAvailableRooms(Long id){
+        final String url = "http://localhost:8080/rooms/";
+        List<Room> rooms = new ArrayList<>();
+        List<Long> ids = hotelRepository.findById(id).orElseThrow(RuntimeException::new)
+                .getAvailableRooms();
+        for(Long num: ids){
+            rooms.add(restTemplate.getForObject(url + num, Room.class));
+        }
+        return rooms;
     }
 }
