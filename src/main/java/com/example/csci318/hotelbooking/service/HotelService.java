@@ -51,7 +51,7 @@ public class HotelService {
     }
 
     // Delete a hotel
-    public Optional<Void> deleteHotel(Long id) {
+    public Optional<Void> deleteHotel(Long id){
         return hotelRepository.findById(id).map(hotel -> {
             hotelRepository.delete(hotel);
             return null;
