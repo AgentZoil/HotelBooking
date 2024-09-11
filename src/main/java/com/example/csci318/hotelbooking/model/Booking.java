@@ -1,11 +1,14 @@
 package com.example.csci318.hotelbooking.model;
 
+import com.example.csci318.hotelbooking.model.event.BookingEvent;
 import jakarta.persistence.*;
+import org.springframework.data.domain.AbstractAggregateRoot;
+
 import java.util.Date;
 import java.util.Objects;
 
 @Entity
-public class Booking {
+public class Booking extends AbstractAggregateRoot<Booking> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
