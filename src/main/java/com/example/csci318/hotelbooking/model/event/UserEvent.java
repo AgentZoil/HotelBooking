@@ -11,6 +11,8 @@ public class UserEvent {
     @GeneratedValue
     private long Id;
     @Column
+    private String eventName;
+    @Column
     private String name;
     @Column
     private String email;
@@ -20,6 +22,14 @@ public class UserEvent {
     private String phoneNumber;
 
     public UserEvent() {
+    }
+
+    public String getEventName() {
+        return eventName;
+    }
+
+    public void setEventName(String eventName) {
+        this.eventName = eventName;
     }
 
     public String getName() {
@@ -57,10 +67,12 @@ public class UserEvent {
     @Override
     public String toString() {
         return "UserEvent{" +
-                "name='" + name + '\'' +
+                "eventName='" + eventName + '\'' +
+                ", name='" + name + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +
                 '}';
     }
+
 }

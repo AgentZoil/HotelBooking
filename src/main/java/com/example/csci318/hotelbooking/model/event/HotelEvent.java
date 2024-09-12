@@ -11,6 +11,8 @@ public class HotelEvent {
     @GeneratedValue
     private long Id;
     @Column
+    private String event_name;
+    @Column
     private String name;
     @Column
     private String location;
@@ -46,6 +48,14 @@ public class HotelEvent {
         this.description = description;
     }
 
+    public String getEvent_name() {
+        return event_name;
+    }
+
+    public void setEvent_name(String event_name) {
+        this.event_name = event_name;
+    }
+
     public double getPricePerNight() {
         return pricePerNight;
     }
@@ -57,7 +67,8 @@ public class HotelEvent {
     @Override
     public String toString() {
         return "HotelEvent{" +
-                "name='" + name + '\'' +
+                "event_name='" + event_name + '\'' +
+                ", name='" + name + '\'' +
                 ", location='" + location + '\'' +
                 ", description='" + description + '\'' +
                 ", pricePerNight=" + pricePerNight +

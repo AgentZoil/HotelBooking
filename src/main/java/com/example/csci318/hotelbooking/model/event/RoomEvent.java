@@ -11,6 +11,8 @@ public class RoomEvent {
     @GeneratedValue
     private long Id;
     @Column
+    private String eventName;
+    @Column
     private String roomNumber;
     @Column
     private String type;
@@ -20,6 +22,14 @@ public class RoomEvent {
     private boolean availability;
 
     public RoomEvent() {
+    }
+
+    public String getEventName() {
+        return eventName;
+    }
+
+    public void setEventName(String eventName) {
+        this.eventName = eventName;
     }
 
     public String getRoomNumber() {
@@ -57,7 +67,8 @@ public class RoomEvent {
     @Override
     public String toString() {
         return "RoomEvent{" +
-                "roomNumber='" + roomNumber + '\'' +
+                "eventName='" + eventName + '\'' +
+                ", roomNumber='" + roomNumber + '\'' +
                 ", type='" + type + '\'' +
                 ", price=" + price +
                 ", availability=" + availability +
