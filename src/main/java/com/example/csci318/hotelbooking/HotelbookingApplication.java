@@ -33,8 +33,6 @@ public class HotelbookingApplication {
 			entryHotel1.setName("Nice hotel 1");
 			entryHotel1.setPricePerNight(100);
 
-
-
 //			Create 2 rooms at start
 			Room entryRoom1 = new Room();
 			entryRoom1.setAvailability(true);
