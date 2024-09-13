@@ -217,7 +217,7 @@ The console http://localhost:8080/h2-console/. To log on, change the value in th
 - **Create a New Booking**
     - In Windows CMD:
       ```shell
-     curl -X POST -H "Content-Type:application/json" \
+      curl -X POST -H "Content-Type:application/json" \
       -d '{
         "checkInDate": "2024-08-01",
         "checkOutDate": "2024-08-07",
