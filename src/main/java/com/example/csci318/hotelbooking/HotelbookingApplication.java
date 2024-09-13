@@ -41,7 +41,10 @@ public class HotelbookingApplication {
 			entryRoom1.setPrice(100);
 			entryRoom1.setRoomNumber("001");
 
+			entryRoom1.locatedAt(entryHotel1);
 			roomRepository.save(entryRoom1);
+
+
 			System.out.println(roomRepository.findById(entryRoom1.getId()).orElseThrow()); // print the room
 
 			Room entryRoom2 = new Room();
@@ -51,7 +54,10 @@ public class HotelbookingApplication {
 			entryRoom2.setPrice(150);
 			entryRoom2.setRoomNumber("002");
 
+			entryRoom2.locatedAt(entryHotel1);
 			roomRepository.save(entryRoom2);
+
+
 			System.out.println(roomRepository.findById(entryRoom2.getId()).orElseThrow()); // print the room
 
 			entryHotel1.addAvailableRoom(entryRoom1.getId());

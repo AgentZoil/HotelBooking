@@ -1,6 +1,6 @@
 package com.example.csci318.hotelbooking.model;
 
-import com.example.csci318.hotelbooking.model.event.BookingEvent;
+//import com.example.csci318.hotelbooking.model.event.BookingEvent;
 import jakarta.persistence.*;
 import org.springframework.data.domain.AbstractAggregateRoot;
 
@@ -20,6 +20,9 @@ public class Booking extends AbstractAggregateRoot<Booking> {
     @ManyToOne
     @JoinColumn(name = "hotel_id")
     private Hotel hotel;
+
+    public Booking() {
+    }
 
     @ManyToOne
     @JoinColumn(name = "room_id")
