@@ -2,6 +2,7 @@ package com.example.csci318.hotelbooking.service;
 
 import com.example.csci318.hotelbooking.model.Booking;
 import com.example.csci318.hotelbooking.model.Room;
+import com.example.csci318.hotelbooking.model.User;
 import com.example.csci318.hotelbooking.repository.BookingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,6 +17,8 @@ public class BookingService {
     private BookingRepository bookingRepository;
     @Autowired
     private RoomService roomService;
+    @Autowired
+    private UserService userService;
 
     // Get all bookings
     public List<Booking> getAllBookings() {
@@ -31,6 +34,9 @@ public class BookingService {
     public Booking createBooking(Booking booking) {
         Room room = roomService.getRoomById(booking.getRoom().getId())
                 .orElseThrow(() -> new RuntimeException("Room not found"));
+
+        User user = userService.getUserById(booking.getUser().getId())
+                .orElseThrow(() -> new RuntimeException("User not found"));
 
         // Check if the room is available
         if(!room.isAvailability()){

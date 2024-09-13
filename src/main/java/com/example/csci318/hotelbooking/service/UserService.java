@@ -19,10 +19,8 @@ public class UserService {
         return userRepository.findAll();
     }
 
-    public ResponseEntity<User> getUserById(Long id) {
-        return userRepository.findById(id)
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
+    public Optional<User> getUserById(Long id) {
+        return userRepository.findById(id);
     }
 
     public User createUser(User user) {
