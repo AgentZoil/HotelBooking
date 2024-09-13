@@ -19,6 +19,7 @@ public class Room extends AbstractAggregateRoot<Room> {
     private String type;
     private double price;
     private boolean availability;
+    private String hotelName;
 
     @ManyToOne
 //    @JoinColumn(name = "hotel_id", nullable = false)
@@ -112,18 +113,6 @@ public class Room extends AbstractAggregateRoot<Room> {
         return Objects.hash(id, roomNumber, type, price, availability, hotel);
     }
 
-//    @Override
-//    public String toString() {
-//        return "Room{" +
-//                "roomID=" + id +
-//                ", roomNumber='" + roomNumber + '\'' +
-//                ", type='" + type + '\'' +
-//                ", price=" + price +
-//                ", availability=" + availability +
-//                ", hotel=" + hotel.getName() +  // Avoid printing the entire hotel object to prevent recursion
-//                '}';
-//    }
-
     public void isBooked(){
         RoomEvent roomEvent = new RoomEvent();
         roomEvent.setAvailability(false);
@@ -146,13 +135,19 @@ public class Room extends AbstractAggregateRoot<Room> {
         registerEvent(roomEvent);
     }
 
+    public void locatedAt(Hotel hotel){
+        this.hotelName = hotel.getName();
+    }
+
+    @Override
     public String toString() {
         return "Room{" +
                 "roomID=" + id +
                 ", roomNumber='" + roomNumber + '\'' +
                 ", type='" + type + '\'' +
                 ", price=" + price +
-                ", availability=" + availability +
+                ", availability=" + availability + '\'' +
+                ", located_at=" + hotelName +
                 '}';
     }
 }
