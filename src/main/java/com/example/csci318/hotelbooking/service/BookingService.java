@@ -1,18 +1,21 @@
 package com.example.csci318.hotelbooking.service;
 
 import com.example.csci318.hotelbooking.model.Booking;
+import com.example.csci318.hotelbooking.model.Room;
 import com.example.csci318.hotelbooking.repository.BookingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.rmi.RemoteException;
 import java.util.List;
 import java.util.Optional;
 
 @Service
 public class BookingService {
-
     @Autowired
     private BookingRepository bookingRepository;
+    @Autowired
+    private RoomService roomService;
 
     // Get all bookings
     public List<Booking> getAllBookings() {
@@ -26,6 +29,20 @@ public class BookingService {
 
     // Create a new booking
     public Booking createBooking(Booking booking) {
+        Room room = roomService.getRoomById(booking.getRoom().getId())
+                .orElseThrow(() -> new RuntimeException("Room not found"));
+
+        // Check if the room is available
+        if(!room.isAvailability()){
+            throw new RuntimeException("Room is not available for booking");
+        }
+
+        // If the room is available, set the room as unavailable and register the event
+        room.setAvailability(false);
+        room.isBooked();
+
+        roomService.updateRoom(room.getId(), room);
+
         return bookingRepository.save(booking);
     }
 

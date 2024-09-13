@@ -29,6 +29,9 @@ public class RoomService {
         return roomRepository.save(room);
     }
 
+    public RoomService() {
+    }
+
     // Update an existing room
     public Optional<Room> updateRoom(Long id, Room roomDetails) {
         return roomRepository.findById(id).map(room -> {
@@ -47,5 +50,11 @@ public class RoomService {
             roomRepository.delete(room);
             return null;
         });
+    }
+
+    public void bookRoom(long Id){
+        Room room = roomRepository.findById(Id).orElseThrow(RuntimeException::new);
+        room.isBooked();
+        roomRepository.save(room);
     }
 }

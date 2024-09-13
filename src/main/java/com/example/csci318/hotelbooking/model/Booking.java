@@ -21,6 +21,9 @@ public class Booking extends AbstractAggregateRoot<Booking> {
     @JoinColumn(name = "hotel_id")
     private Hotel hotel;
 
+    public Booking() {
+    }
+
     @ManyToOne
     @JoinColumn(name = "room_id")
     private Room room;

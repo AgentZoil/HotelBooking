@@ -1,12 +1,15 @@
 package com.example.csci318.hotelbooking.model;
 
+import com.example.csci318.hotelbooking.model.event.RoomEvent;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import jakarta.persistence.*;
+import org.springframework.data.domain.AbstractAggregateRoot;
+
 import java.util.Objects;
 
 @Entity
-public class Room {
+public class Room extends AbstractAggregateRoot<Room> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -109,7 +112,7 @@ public class Room {
         return Objects.hash(id, roomNumber, type, price, availability, hotel);
     }
 
-    @Override
+//    @Override
 //    public String toString() {
 //        return "Room{" +
 //                "roomID=" + id +
@@ -120,6 +123,17 @@ public class Room {
 //                ", hotel=" + hotel.getName() +  // Avoid printing the entire hotel object to prevent recursion
 //                '}';
 //    }
+
+    public void isBooked(){
+        RoomEvent roomEvent = new RoomEvent();
+        roomEvent.setAvailability(false);
+        roomEvent.setRoomNumber(this.getRoomNumber());
+        roomEvent.setType(this.getType());
+        roomEvent.setPrice(this.getPrice());
+        roomEvent.setEventName("booked");
+
+        registerEvent(roomEvent);
+    }
 
     public String toString() {
         return "Room{" +
