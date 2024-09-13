@@ -59,9 +59,28 @@ public class BookingService {
 
     // Delete a booking
     public Optional<Void> deleteBooking(Long id) {
+        // find the booking
+        Booking b = getBookingById(id)
+                .orElseThrow(() -> new RuntimeException("Booking is not found"));
+
+        // find the room associated with the booking
+        Room room = roomService.getRoomById(b.getRoom().getId())
+                .orElseThrow(() -> new RuntimeException("Room not found"));
+
+        // set the availability of the room
+        room.setAvailability(true);
+
+        // register the event
+        room.isReleased();
+
+        // update the room in the repo
+        roomService.updateRoom(room.getId(), room);
+
         return bookingRepository.findById(id).map(booking -> {
             bookingRepository.delete(booking);
             return null;
         });
+
+
     }
 }

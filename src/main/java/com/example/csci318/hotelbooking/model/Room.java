@@ -130,7 +130,18 @@ public class Room extends AbstractAggregateRoot<Room> {
         roomEvent.setRoomNumber(this.getRoomNumber());
         roomEvent.setType(this.getType());
         roomEvent.setPrice(this.getPrice());
-        roomEvent.setEventName("booked");
+        roomEvent.setEventName("This room has been booked");
+
+        registerEvent(roomEvent);
+    }
+
+    public void isReleased(){
+        RoomEvent roomEvent = new RoomEvent();
+        roomEvent.setAvailability(true);
+        roomEvent.setRoomNumber(this.getRoomNumber());
+        roomEvent.setType(this.getType());
+        roomEvent.setPrice(this.getPrice());
+        roomEvent.setEventName("This room has been released");
 
         registerEvent(roomEvent);
     }
