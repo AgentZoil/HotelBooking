@@ -1,10 +1,13 @@
 package com.example.csci318.hotelbooking.service;
 
+import com.example.csci318.hotelbooking.model.Hotel;
 import com.example.csci318.hotelbooking.model.Room;
 import com.example.csci318.hotelbooking.repository.RoomRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -13,6 +16,7 @@ public class RoomService {
 
     @Autowired
     private RoomRepository roomRepository;
+    private final RestTemplate restTemplate;
 
     // Get all rooms
     public List<Room> getAllRooms() {
@@ -29,7 +33,9 @@ public class RoomService {
         return roomRepository.save(room);
     }
 
-    public RoomService() {
+    public RoomService(RoomRepository roomRepository, RestTemplate restTemplate) {
+        this.roomRepository = roomRepository;
+        this.restTemplate = restTemplate;
     }
 
     // Update an existing room
@@ -56,5 +62,14 @@ public class RoomService {
         Room room = roomRepository.findById(Id).orElseThrow(RuntimeException::new);
         room.isBooked();
         roomRepository.save(room);
+    }
+
+//     get the hotel information
+    public Hotel getHotelInfo(Long id){
+        Hotel hotel = roomRepository.findById(id).orElseThrow(RuntimeException::new)
+                .getHotel();
+        final String url = "http://localhost:8080/hotels/" + hotel.getId();
+
+        return restTemplate.getForObject(url, Hotel.class);
     }
 }
