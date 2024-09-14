@@ -175,6 +175,43 @@ The console http://localhost:8080/h2-console/. To log on, change the value in th
       ```json
       {}
       ```
+
+- **Delete a Room**
+    - Request:
+      ```shell
+      curl -X GET http://localhost:8080/rooms/1](http://localhost:8080/rooms/1/hotels
+      ```
+    - Response:
+      ```json
+      {
+          "id": 1,
+          "name": "Nice hotel 1",
+          "location": "Somewhere nice",
+          "description": "This is a nice hotel",
+          "pricePerNight": 100.0,
+          "rooms": [
+              {
+                  "id": 1,
+                  "roomNumber": "001",
+                  "type": "type 1",
+                  "price": 100.0,
+                  "availability": true
+              },
+              {
+                  "id": 2,
+                  "roomNumber": "002",
+                  "type": "type 2",
+                  "price": 150.0,
+                  "availability": true
+              }
+          ],
+          "availableRooms": [
+              1,
+              2
+          ]
+      }
+      ```
+      
 ### Users
 
 - **Create a New User**
