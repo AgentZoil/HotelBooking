@@ -96,7 +96,22 @@ The console http://localhost:8080/h2-console/. To log on, change the value in th
       ```
     - Response:
       ```json
-      {}
+      [
+          {
+              "id": 1,
+              "roomNumber": "001",
+              "type": "type 1",
+              "price": 100.0,
+              "availability": true
+          },
+          {
+              "id": 2,
+              "roomNumber": "002",
+              "type": "type 2",
+              "price": 150.0,
+              "availability": true
+          }
+      ]
       ```
 
 ### Rooms
