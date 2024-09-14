@@ -176,7 +176,7 @@ The console http://localhost:8080/h2-console/. To log on, change the value in th
       {}
       ```
 
-- **Delete a Room**
+- **Find information of the Hotel where the room is located at**
     - Request:
       ```shell
       curl -X GET http://localhost:8080/rooms/1](http://localhost:8080/rooms/1/hotels
