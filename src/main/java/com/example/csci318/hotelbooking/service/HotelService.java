@@ -19,7 +19,7 @@ public class HotelService {
     private final HotelRepository hotelRepository;
     private final RestTemplate restTemplate;
 
-    HotelService(HotelRepository hotelRepository, RestTemplate restTemplate){
+    public HotelService(HotelRepository hotelRepository, RestTemplate restTemplate){
         this.hotelRepository = hotelRepository;
         this.restTemplate = restTemplate;
     }

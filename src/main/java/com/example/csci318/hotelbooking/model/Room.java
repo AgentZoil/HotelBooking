@@ -26,6 +26,7 @@ public class Room extends AbstractAggregateRoot<Room> {
     @JsonBackReference  // This prevents the infinite recursion
     private Hotel hotel;
 
+
     // Constructors, Getters, and Setters
 
     public Room() {
@@ -136,7 +137,7 @@ public class Room extends AbstractAggregateRoot<Room> {
     }
 
     public void locatedAt(Hotel hotel){
-        this.hotelName = hotel.getName();
+        this.hotel = hotel;
     }
 
     @Override
@@ -147,7 +148,7 @@ public class Room extends AbstractAggregateRoot<Room> {
                 ", type='" + type + '\'' +
                 ", price=" + price +
                 ", availability=" + availability + '\'' +
-                ", located_at=" + hotelName +
+                ", located_at=" + this.hotel.getName() +
                 '}';
     }
 }
