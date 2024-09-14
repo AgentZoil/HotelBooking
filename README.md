@@ -89,6 +89,15 @@ The console http://localhost:8080/h2-console/. To log on, change the value in th
       ```json
       {}
       ```
+- **Find all available rooms of a Hotel**
+    - Request:
+      ```shell
+      curl -X GET http://localhost:8080/hotels/1/availableRooms
+      ```
+    - Response:
+      ```json
+      {}
+      ```
 
 ### Rooms
 
