@@ -1,11 +1,14 @@
 package com.example.csci318.hotelbooking.model;
 
+import com.example.csci318.hotelbooking.model.event.UserEvent;
 import jakarta.persistence.*;
+import org.springframework.data.domain.AbstractAggregateRoot;
+
 import java.util.Objects;
 
 @Entity
 @Table(name = "users") // Rename the table to 'users'
-public class User {
+public class User extends AbstractAggregateRoot<User> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -83,6 +86,17 @@ public class User {
     @Override
     public int hashCode() {
         return Objects.hash(id, name, email, password, phoneNumber);
+    }
+
+    public void makeBooking(){
+        UserEvent userEvent = new UserEvent();
+        userEvent.setEventName("The user has made a booking");
+        userEvent.setEmail(this.getEmail());
+        userEvent.setName(this.getName());
+        userEvent.setPassword(this.getPassword());
+        userEvent.setPhoneNumber(this.getPhoneNumber());
+
+        registerEvent(userEvent);
     }
 }
 

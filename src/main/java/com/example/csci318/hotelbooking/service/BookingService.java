@@ -47,6 +47,9 @@ public class BookingService {
         room.setAvailability(false);
         room.isBooked();
 
+        // register the event that user has made the booking
+        user.makeBooking();
+
         roomService.updateRoom(room.getId(), room);
 
         return bookingRepository.save(booking);
@@ -86,7 +89,5 @@ public class BookingService {
             bookingRepository.delete(booking);
             return null;
         });
-
-
     }
 }
