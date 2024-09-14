@@ -19,7 +19,7 @@ public class Room extends AbstractAggregateRoot<Room> {
     private String type;
     private double price;
     private boolean availability;
-    private String hotelName;
+//    private String hotelName;
 
     @ManyToOne
 //    @JoinColumn(name = "hotel_id", nullable = false)
