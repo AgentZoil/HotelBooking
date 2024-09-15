@@ -25,8 +25,6 @@ public class BookingService {
     private UserService userService;
     @Autowired
     private HotelService hotelService;
-    @Autowired
-    private BookingService bookingService;
 
     // Get all bookings
     public List<Booking> getAllBookings() {
