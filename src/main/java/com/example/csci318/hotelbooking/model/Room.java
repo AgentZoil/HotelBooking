@@ -10,21 +10,20 @@ import java.util.Objects;
 
 @Entity
 public class Room extends AbstractAggregateRoot<Room> {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String roomNumber;
     private String type;
     private double price;
     private boolean availability;
-    private String hotelName;
+//    private String hotelName;
 
     @ManyToOne
 //    @JoinColumn(name = "hotel_id", nullable = false)
     @JsonBackReference  // This prevents the infinite recursion
     private Hotel hotel;
+
 
     // Constructors, Getters, and Setters
 
@@ -113,13 +112,15 @@ public class Room extends AbstractAggregateRoot<Room> {
         return Objects.hash(id, roomNumber, type, price, availability, hotel);
     }
 
-    public void isBooked(){
+    public void isBooked(String userName){
         RoomEvent roomEvent = new RoomEvent();
         roomEvent.setAvailability(false);
         roomEvent.setRoomNumber(this.getRoomNumber());
         roomEvent.setType(this.getType());
         roomEvent.setPrice(this.getPrice());
-        roomEvent.setEventName("This room has been booked");
+        roomEvent.setEventName("This room has been booked by: " + userName);
+
+        System.out.println(roomEvent.toString());
 
         registerEvent(roomEvent);
     }
@@ -136,7 +137,7 @@ public class Room extends AbstractAggregateRoot<Room> {
     }
 
     public void locatedAt(Hotel hotel){
-        this.hotelName = hotel.getName();
+        this.hotel = hotel;
     }
 
     @Override
@@ -147,7 +148,7 @@ public class Room extends AbstractAggregateRoot<Room> {
                 ", type='" + type + '\'' +
                 ", price=" + price +
                 ", availability=" + availability + '\'' +
-                ", located_at=" + hotelName +
+                ", located_at=" + this.hotel.getName() +
                 '}';
     }
 }

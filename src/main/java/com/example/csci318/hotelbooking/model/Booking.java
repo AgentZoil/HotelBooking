@@ -15,7 +15,7 @@ public class Booking extends AbstractAggregateRoot<Booking> {
 
     @ManyToOne
     @JoinColumn(name = "user_id")
-    private User user;
+    private Users user;
 
     @ManyToOne
     @JoinColumn(name = "hotel_id")
@@ -40,11 +40,11 @@ public class Booking extends AbstractAggregateRoot<Booking> {
         this.id = id;
     }
 
-    public User getUser() {
+    public Users getUser() {
         return user;
     }
 
-    public void setUser(User user) {
+    public void setUser(Users user) {
         this.user = user;
     }
 

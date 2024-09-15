@@ -1,15 +1,17 @@
 package com.example.csci318.hotelbooking.model;
 
+import com.example.csci318.hotelbooking.model.event.HotelEvent;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.*;
+import org.springframework.data.domain.AbstractAggregateRoot;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 @Entity
-public class Hotel {
+public class Hotel extends AbstractAggregateRoot<Hotel> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,7 +22,7 @@ public class Hotel {
     private String description;
     private double pricePerNight;
 
-    @OneToMany(mappedBy = "hotel", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "hotel", orphanRemoval = true)
     @JsonManagedReference  // This prevents the infinite recursion
     private List<Room> rooms; // create a list of rooms
     private List<Long> availableRooms = new ArrayList<>(); // create a list of available rooms
@@ -108,6 +110,21 @@ public class Hotel {
     @Override
     public int hashCode() {
         return Objects.hash(id, name, location, description, pricePerNight);
+    }
+
+    public void makeBooking(String userName){
+        HotelEvent hotelEvent = new HotelEvent();
+        hotelEvent.setUserName(userName);
+        hotelEvent.setName(this.getName());
+        hotelEvent.setEvent_name("This hotel has been visited by " + userName);
+        hotelEvent.setDescription(this.getDescription());
+        hotelEvent.setLocation(this.getLocation());
+        hotelEvent.setDescription(this.getDescription());
+        hotelEvent.setPricePerNight(this.getPricePerNight());
+
+        System.out.println(hotelEvent.toString());
+
+        registerEvent(hotelEvent);
     }
 
     @Override

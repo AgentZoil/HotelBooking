@@ -247,6 +247,54 @@ The console http://localhost:8080/h2-console/. To log on, change the value in th
       ```
     - Response:
       ```json
+      [
+          {
+              "id": 1,
+              "user": {
+                  "id": 1,
+                  "name": "Gia Bach Nhu",
+                  "email": "gbn447@uow.com",
+                  "password": "123",
+                  "phoneNumber": "0423398765"
+              },
+              "hotel": {
+                  "id": 1,
+                  "name": "Nice hotel 1",
+                  "location": "Somewhere nice",
+                  "description": "This is a nice hotel",
+                  "pricePerNight": 100.0,
+                  "rooms": [
+                      {
+                          "id": 1,
+                          "roomNumber": "001",
+                          "type": "type 1",
+                          "price": 100.0,
+                          "availability": false
+                      },
+                      {
+                          "id": 2,
+                          "roomNumber": "002",
+                          "type": "type 2",
+                          "price": 150.0,
+                          "availability": true
+                      }
+                  ],
+                  "availableRooms": [
+                      1,
+                      2
+                  ]
+              },
+              "room": {
+                  "id": 1,
+                  "roomNumber": "001",
+                  "type": "type 1",
+                  "price": 100.0,
+                  "availability": false
+              },
+              "checkInDate": "2024-08-01T00:00:00.000+00:00",
+              "checkOutDate": "2024-08-07T00:00:00.000+00:00"
+          }
+      ]
       {"id":1,"name":"Gia Bach Nhu","email":"gbn447@uow.com","password":"123","phoneNumber": "0423398765"}
       ```
 

@@ -9,7 +9,7 @@ import jakarta.persistence.Id;
 public class UserEvent {
     @Id
     @GeneratedValue
-    private long Id;
+    private long id;
     @Column
     private String eventName;
     @Column
