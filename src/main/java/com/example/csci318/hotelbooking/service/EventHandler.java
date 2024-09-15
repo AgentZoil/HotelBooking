@@ -25,19 +25,19 @@ public class EventHandler {
         this.hotelEventRepository = hotelEventRepository;
     }
 
-    @TransactionalEventListener
+    @EventListener
     public void handleUserEvent(UserEvent userEvent){
         System.out.println("User event received: " + userEvent.getEventName());
         userEventRepository.save(userEvent);
     }
 
-    @TransactionalEventListener
+    @EventListener
     public void handleRoomEvent(RoomEvent roomEvent){
         System.out.println("Room event received: " + roomEvent.getEventName());
         roomEventRepository.save(roomEvent);
     }
 
-    @TransactionalEventListener
+    @EventListener
     public void handleHotelEvent(HotelEvent hotelEvent){
         System.out.println("Hotel event received: " + hotelEvent.getEvent_name());
         hotelEventRepository.save(hotelEvent);

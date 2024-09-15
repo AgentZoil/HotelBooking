@@ -5,6 +5,7 @@ import com.example.csci318.hotelbooking.model.Hotel;
 import com.example.csci318.hotelbooking.model.Room;
 import com.example.csci318.hotelbooking.model.Users;
 import com.example.csci318.hotelbooking.repository.BookingRepository;
+import com.example.csci318.hotelbooking.repository.UserRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
