@@ -89,6 +89,30 @@ The console http://localhost:8080/h2-console/. To log on, change the value in th
       ```json
       {}
       ```
+- **Find all available rooms of a Hotel**
+    - Request:
+      ```shell
+      curl -X GET http://localhost:8080/hotels/1/availableRooms
+      ```
+    - Response:
+      ```json
+      [
+          {
+              "id": 1,
+              "roomNumber": "001",
+              "type": "type 1",
+              "price": 100.0,
+              "availability": true
+          },
+          {
+              "id": 2,
+              "roomNumber": "002",
+              "type": "type 2",
+              "price": 150.0,
+              "availability": true
+          }
+      ]
+      ```
 
 ### Rooms
 
@@ -152,38 +176,74 @@ The console http://localhost:8080/h2-console/. To log on, change the value in th
       {}
       ```
 
-### Bookings
-
-- **Create a New Booking**
-    - In Windows CMD:
+- **Find information of the Hotel where the room is located at**
+    - Request:
       ```shell
-      curl -X POST -H "Content-Type:application/json" -d "{\"checkInDate\":\"2024-08-01\",\"checkOutDate\":\"2024-08-07\",\"hotel\": {\"id\": 1 },\"room\": {\"id\": 1 }}" http://localhost:8080/bookings
-      ```
-    - In MacOS/Linux:
-      ```bash
-      curl -X POST -H "Content-Type:application/json" -d '{"checkInDate":"2024-08-01","checkOutDate":"2024-08-07","hotel": {"id": 1 },"room": {"id": 1 }' http://localhost:8080/bookings
+      curl -X GET http://localhost:8080/rooms/1](http://localhost:8080/rooms/1/hotels
       ```
     - Response:
       ```json
-      {"id":1,"user":null,"hotel":{"id":1,"name":null,"location":null,"description":null,"pricePerNight":0.0,"rooms":null},"room":{"id":1,"roomNumber":null,"type":null,"price":0.0,"availability":false},"checkInDate":"2024-08-01T00:00:00.000+00:00","checkOutDate":"2024-08-07T00:00:00.000+00:00"}
+      {
+          "id": 1,
+          "name": "Nice hotel 1",
+          "location": "Somewhere nice",
+          "description": "This is a nice hotel",
+          "pricePerNight": 100.0,
+          "rooms": [
+              {
+                  "id": 1,
+                  "roomNumber": "001",
+                  "type": "type 1",
+                  "price": 100.0,
+                  "availability": true
+              },
+              {
+                  "id": 2,
+                  "roomNumber": "002",
+                  "type": "type 2",
+                  "price": 150.0,
+                  "availability": true
+              }
+          ],
+          "availableRooms": [
+              1,
+              2
+          ]
+      }
+      ```
+      
+### Users
+
+- **Create a New User**
+    - In Windows CMD:
+      ```shell
+      curl -X POST -H "Content-Type:application/json" -d "{\"name\":\"Gia Bach Nhu\",\"email\":\"gbn447@uow.com\",\"password\":\"123\",\"phoneNumber\":\"0423398765\"}" http://localhost:8080/users
+      ```
+    - In MacOS/Linux:
+      ```bash
+      curl -X POST -H "Content-Type:application/json" -d '{"name":"Gia Bach Nhu","email":"gbn447@uow.com","password":"123","phoneNumber":"0423398765"}' http://localhost:8080/users
+      ```
+    - Response:
+      ```json
+      {"id":1,"name":"Gia Bach Nhu","email":"gbn447@uow.com","password":"123","phoneNumber":"0423398765"}
       ```
 
-- **Retrieve All Bookings**
+- **Retrieve All Users**
     - Request:
       ```shell
-      curl -X GET http://localhost:8080/bookings
+      curl -X GET http://localhost:8080/users
       ```
     - Response:
       ```json
       [
-        {"id":1,"user":null,"hotel":{"id":1,"name":"Stockton Hotel","location":"Ohio","description":"An updated description of the budget hotel.","pricePerNight":55.0,"rooms":[{"id":1,"roomNumber":"007","type":"Suite","price":200.0,"availability":false}]},"room":{"id":1,"roomNumber":"007","type":"Suite","price":200.0,"availability":false},"checkInDate":"2024-08-01T00:00:00.000+00:00","checkOutDate":"2024-08-07T00:00:00.000+00:00"}
+        {"id":1,"name":"Gia Bach Nhu","email":"gbn447@uow.com","password":"123","phoneNumber": "0423398765"}
       ]
       ```
 
-- **Retrieve a Specific Booking**
+- **Retrieve a Specific User**
     - Request:
       ```shell
-      curl -X GET http://localhost:8080/bookings/1
+      curl -X GET http://localhost:8080/users/1
       ```
     - Response:
       ```json
@@ -235,67 +295,6 @@ The console http://localhost:8080/h2-console/. To log on, change the value in th
               "checkOutDate": "2024-08-07T00:00:00.000+00:00"
           }
       ]
-      ```
-
-- **Update a Booking**
-    - In Windows CMD:
-      ```shell
-      curl -X PUT -H "Content-Type:application/json" -d "{\"checkInDate\":\"2024-08-05\",\"checkOutDate\":\"2024-08-10\",\"hotel\": {\"id\": 1 },\"room\": {\"id\": 1 }}" http://localhost:8080/bookings/1
-      ```
-    - In MacOS/Linux:
-      ```bash
-      curl -X PUT -H "Content-Type:application/json" -d '{"checkInDate":"2024-08-05","checkOutDate":"2024-08-10","hotel": {"id": 1 },"room": {"id": 1 }}' http://localhost:8080/bookings/1
-      ```
-    - Response:
-      ```json
-      {"id":1,"user":null,"hotel":{"id":1,"name":null,"location":null,"description":null,"pricePerNight":0.0,"rooms":null},"room":{"id":1,"roomNumber":null,"type":null,"price":0.0,"availability":false},"checkInDate":"2024-08-05T00:00:00.000+00:00","checkOutDate":"2024-08-10T00:00:00.000+00:00"}
-      ```
-
-- **Delete a Booking**
-    - Request:
-      ```shell
-      curl -X DELETE http://localhost:8080/bookings/1
-      ```
-    - Response:
-      ```json
-      {}
-      ```
-
-### Users
-
-- **Create a New User**
-    - In Windows CMD:
-      ```shell
-      curl -X POST -H "Content-Type:application/json" -d "{\"name\":\"Gia Bach Nhu\",\"email\":\"gbn447@uow.com\",\"password\":\"123\",\"phoneNumber\":\"0423398765\"}" http://localhost:8080/users
-      ```
-    - In MacOS/Linux:
-      ```bash
-      curl -X POST -H "Content-Type:application/json" -d '{"name":"Gia Bach Nhu","email":"gbn447@uow.com","password":"123","phoneNumber":"0423398765"}' http://localhost:8080/users
-      ```
-    - Response:
-      ```json
-      {"id":1,"name":"Gia Bach Nhu","email":"gbn447@uow.com","password":"123","phoneNumber":"0423398765"}
-      ```
-
-- **Retrieve All Users**
-    - Request:
-      ```shell
-      curl -X GET http://localhost:8080/users
-      ```
-    - Response:
-      ```json
-      [
-        {"id":1,"name":"Gia Bach Nhu","email":"gbn447@uow.com","password":"123","phoneNumber": "0423398765"}
-      ]
-      ```
-
-- **Retrieve a Specific User**
-    - Request:
-      ```shell
-      curl -X GET http://localhost:8080/users/1
-      ```
-    - Response:
-      ```json
       {"id":1,"name":"Gia Bach Nhu","email":"gbn447@uow.com","password":"123","phoneNumber": "0423398765"}
       ```
 
@@ -322,3 +321,76 @@ The console http://localhost:8080/h2-console/. To log on, change the value in th
       ```json
       {}
       ```
+### Bookings
+
+- **Create a New Booking**
+    - In Windows CMD:
+      ```shell
+      curl -X POST -H "Content-Type:application/json" \
+      -d '{
+        "checkInDate": "2024-08-01",
+        "checkOutDate": "2024-08-07",
+        "hotel": { "id": 1 },
+        "room": { "id": 1 },
+        "user": { "id": 1 }
+      }' \
+      http://localhost:8080/bookings
+
+
+      ```
+    - In MacOS/Linux:
+      ```bash
+      curl -X POST -H "Content-Type:application/json" -d '{"checkInDate":"2024-08-01","checkOutDate":"2024-08-07","hotel": {"id": 1 },"room": {"id": 1 }' http://localhost:8080/bookings
+      ```
+    - Response:
+      ```json
+      {"id":1,"user":null,"hotel":{"id":1,"name":null,"location":null,"description":null,"pricePerNight":0.0,"rooms":null},"room":{"id":1,"roomNumber":null,"type":null,"price":0.0,"availability":false},"checkInDate":"2024-08-01T00:00:00.000+00:00","checkOutDate":"2024-08-07T00:00:00.000+00:00"}
+      ```
+
+- **Retrieve All Bookings**
+    - Request:
+      ```shell
+      curl -X GET http://localhost:8080/bookings
+      ```
+    - Response:
+      ```json
+      [
+        {"id":1,"user":null,"hotel":{"id":1,"name":"Stockton Hotel","location":"Ohio","description":"An updated description of the budget hotel.","pricePerNight":55.0,"rooms":[{"id":1,"roomNumber":"007","type":"Suite","price":200.0,"availability":false}]},"room":{"id":1,"roomNumber":"007","type":"Suite","price":200.0,"availability":false},"checkInDate":"2024-08-01T00:00:00.000+00:00","checkOutDate":"2024-08-07T00:00:00.000+00:00"}
+      ]
+      ```
+
+- **Retrieve a Specific Booking**
+    - Request:
+      ```shell
+      curl -X GET http://localhost:8080/bookings/1
+      ```
+    - Response:
+      ```json
+      {"id":1,"user":null,"hotel":{"id":1,"name":"Stockton Hotel","location":"Ohio","description":"An updated description of the budget hotel.","pricePerNight":55.0,"rooms":[{"id":1,"roomNumber":"007","type":"Suite","price":200.0,"availability":false}]},"room":{"id":1,"roomNumber":"007","type":"Suite","price":200.0,"availability":false},"checkInDate":"2024-08-01T00:00:00.000+00:00","checkOutDate":"2024-08-07T00:00:00.000+00:00"}
+      ```
+
+- **Update a Booking**
+    - In Windows CMD:
+      ```shell
+      curl -X PUT -H "Content-Type:application/json" -d "{\"checkInDate\":\"2024-08-05\",\"checkOutDate\":\"2024-08-10\",\"hotel\": {\"id\": 1 },\"room\": {\"id\": 1 }}" http://localhost:8080/bookings/1
+      ```
+    - In MacOS/Linux:
+      ```bash
+      curl -X PUT -H "Content-Type:application/json" -d '{"checkInDate":"2024-08-05","checkOutDate":"2024-08-10","hotel": {"id": 1 },"room": {"id": 1 }}' http://localhost:8080/bookings/1
+      ```
+    - Response:
+      ```json
+      {"id":1,"user":null,"hotel":{"id":1,"name":null,"location":null,"description":null,"pricePerNight":0.0,"rooms":null},"room":{"id":1,"roomNumber":null,"type":null,"price":0.0,"availability":false},"checkInDate":"2024-08-05T00:00:00.000+00:00","checkOutDate":"2024-08-10T00:00:00.000+00:00"}
+      ```
+
+- **Delete a Booking**
+    - Request:
+      ```shell
+      curl -X DELETE http://localhost:8080/bookings/1
+      ```
+    - Response:
+      ```json
+      {}
+      ```
+
+
