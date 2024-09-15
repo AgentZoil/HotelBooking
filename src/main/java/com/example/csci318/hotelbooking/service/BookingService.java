@@ -25,6 +25,8 @@ public class BookingService {
     private UserService userService;
     @Autowired
     private HotelService hotelService;
+    @Autowired
+    private BookingService bookingService;
 
     // Get all bookings
     public List<Booking> getAllBookings() {
@@ -68,6 +70,7 @@ public class BookingService {
         hotelService.updateHotel(hotel.getId(), hotel);
 
 //        return bookingRepository.save(booking);
+        bookingRepository.save(booking);
         booking.makeBooking(user.getName(), hotel.getName(), room.getRoomNumber());
         return bookingRepository.save(booking);
     }

@@ -116,10 +116,10 @@ public class Booking extends AbstractAggregateRoot<Booking> {
     public void makeBooking(String userName, String hotelName, String roomNumber){
         BookingEvent bookingEvent = new BookingEvent();
         bookingEvent.setEventName(String.format("%s has booked room %s at hotel %s", userName, roomNumber, hotelName));
-        bookingEvent.setRoomNumber(this.getRoom().getRoomNumber());
+        bookingEvent.setRoomNumber(roomNumber);
         bookingEvent.setCheckInDate(this.getCheckInDate());
-        bookingEvent.setHotelName(this.getHotel().getName());
-        bookingEvent.setUserName(this.getUser().getName());
+        bookingEvent.setHotelName(hotelName);
+        bookingEvent.setUserName(userName);
         bookingEvent.setCheckOutDate(this.getCheckOutDate());
         System.out.println(bookingEvent.toString());
 
