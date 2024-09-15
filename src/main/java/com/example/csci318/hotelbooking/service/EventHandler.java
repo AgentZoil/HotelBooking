@@ -1,8 +1,10 @@
 package com.example.csci318.hotelbooking.service;
 
+import com.example.csci318.hotelbooking.model.event.BookingEvent;
 import com.example.csci318.hotelbooking.model.event.HotelEvent;
 import com.example.csci318.hotelbooking.model.event.RoomEvent;
 import com.example.csci318.hotelbooking.model.event.UserEvent;
+import com.example.csci318.hotelbooking.repository.BookingEventRepository;
 import com.example.csci318.hotelbooking.repository.HotelEventRepository;
 import com.example.csci318.hotelbooking.repository.RoomEventRepository;
 import com.example.csci318.hotelbooking.repository.UserEventRepository;
@@ -17,12 +19,14 @@ public class EventHandler {
     private final RoomEventRepository roomEventRepository;
     private final UserEventRepository userEventRepository;
     private final HotelEventRepository hotelEventRepository;
+    private final BookingEventRepository bookingEventRepository;
 
     @Autowired
-    EventHandler(RoomEventRepository roomEventRepository, UserEventRepository userEventRepository, HotelEventRepository hotelEventRepository){
+    EventHandler(RoomEventRepository roomEventRepository, UserEventRepository userEventRepository, HotelEventRepository hotelEventRepository, BookingEventRepository bookingEventRepository){
         this.roomEventRepository = roomEventRepository;
         this.userEventRepository = userEventRepository;
         this.hotelEventRepository = hotelEventRepository;
+        this.bookingEventRepository = bookingEventRepository;
     }
 
     @EventListener
@@ -41,5 +45,11 @@ public class EventHandler {
     public void handleHotelEvent(HotelEvent hotelEvent){
         System.out.println("Hotel event received: " + hotelEvent.getEvent_name());
         hotelEventRepository.save(hotelEvent);
+    }
+
+    @EventListener
+    public void handleBookingEvent(BookingEvent bookingEvent){
+        System.out.println("Hotel event received: " + bookingEvent.getEventName());
+        bookingEventRepository.save(bookingEvent);
     }
 }

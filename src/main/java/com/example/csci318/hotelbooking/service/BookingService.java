@@ -4,7 +4,9 @@ import com.example.csci318.hotelbooking.model.Booking;
 import com.example.csci318.hotelbooking.model.Hotel;
 import com.example.csci318.hotelbooking.model.Room;
 import com.example.csci318.hotelbooking.model.Users;
+import com.example.csci318.hotelbooking.model.event.BookingEvent;
 import com.example.csci318.hotelbooking.repository.BookingRepository;
+import com.example.csci318.hotelbooking.repository.HotelEventRepository;
 import com.example.csci318.hotelbooking.repository.UserRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +25,8 @@ public class BookingService {
     private UserService userService;
     @Autowired
     private HotelService hotelService;
+    @Autowired
+    private BookingService bookingService;
 
     // Get all bookings
     public List<Booking> getAllBookings() {
@@ -65,6 +69,9 @@ public class BookingService {
         hotel.makeBooking(user.getName());
         hotelService.updateHotel(hotel.getId(), hotel);
 
+//        return bookingRepository.save(booking);
+        bookingRepository.save(booking);
+        booking.makeBooking(user.getName(), hotel.getName(), room.getRoomNumber());
         return bookingRepository.save(booking);
     }
 
