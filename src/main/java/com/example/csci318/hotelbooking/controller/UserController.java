@@ -1,7 +1,8 @@
 package com.example.csci318.hotelbooking.controller;
 
-import com.example.csci318.hotelbooking.model.User;
+import com.example.csci318.hotelbooking.model.Users;
 import com.example.csci318.hotelbooking.repository.UserRepository;
+import com.example.csci318.hotelbooking.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,26 +15,28 @@ public class UserController {
 
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private UserService userService;
 
     @GetMapping
-    public List<User> getAllUsers() {
+    public List<Users> getAllUsers() {
         return userRepository.findAll();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<User> getUserById(@PathVariable Long id) {
+    public ResponseEntity<Users> getUserById(@PathVariable Long id) {
         return userRepository.findById(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
 
     @PostMapping
-    public User createUser(@RequestBody User user) {
-        return userRepository.save(user);
+    public Users createUser(@RequestBody Users user) {
+        return userService.createUser(user);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<User> updateUser(@PathVariable Long id, @RequestBody User userDetails) {
+    public ResponseEntity<Users> updateUser(@PathVariable Long id, @RequestBody Users userDetails) {
         return userRepository.findById(id)
                 .map(user -> {
                     user.setName(userDetails.getName());

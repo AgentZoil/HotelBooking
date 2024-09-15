@@ -7,8 +7,8 @@ import org.springframework.data.domain.AbstractAggregateRoot;
 import java.util.Objects;
 
 @Entity
-@Table(name = "users") // Rename the table to 'users'
-public class User extends AbstractAggregateRoot<User> {
+//@Table(name = "users") // Rename the table to 'users'
+public class Users extends AbstractAggregateRoot<Users> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -58,16 +58,7 @@ public class User extends AbstractAggregateRoot<User> {
         this.phoneNumber = phoneNumber;
     }
 
-    // toString method
-    @Override
-    public String toString() {
-        return "User{" +
-                "userID=" + id +
-                ", name='" + name + '\'' +
-                ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
-                ", phoneNumber='" + phoneNumber + '\'' +
-                '}';
+    public Users() {
     }
 
     // equals and hashCode methods
@@ -75,7 +66,7 @@ public class User extends AbstractAggregateRoot<User> {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        User user = (User) o;
+        Users user = (Users) o;
         return Objects.equals(id, user.id) &&
                 Objects.equals(name, user.name) &&
                 Objects.equals(email, user.email) &&
@@ -88,15 +79,34 @@ public class User extends AbstractAggregateRoot<User> {
         return Objects.hash(id, name, email, password, phoneNumber);
     }
 
-    public void makeBooking(){
+    public void makeBooking(String hoteName, String roomNumber) {
+        // TEST
+        System.out.println("User is making a booking");
+
         UserEvent userEvent = new UserEvent();
-        userEvent.setEventName("The user has made a booking");
+        userEvent.setEventName("The user has made a booking at " + hoteName + " room number: " + roomNumber);
         userEvent.setEmail(this.getEmail());
         userEvent.setName(this.getName());
         userEvent.setPassword(this.getPassword());
         userEvent.setPhoneNumber(this.getPhoneNumber());
 
+        System.out.println(userEvent.toString());
+
+        // Register the event
         registerEvent(userEvent);
     }
+
+    // toString method
+    @Override
+    public String toString() {
+        return "User{" +
+                "userID=" + id +
+                ", name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                '}';
+    }
+
 }
 

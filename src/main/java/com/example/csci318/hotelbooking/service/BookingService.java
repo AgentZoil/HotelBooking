@@ -1,13 +1,13 @@
 package com.example.csci318.hotelbooking.service;
 
 import com.example.csci318.hotelbooking.model.Booking;
+import com.example.csci318.hotelbooking.model.Hotel;
 import com.example.csci318.hotelbooking.model.Room;
-import com.example.csci318.hotelbooking.model.User;
+import com.example.csci318.hotelbooking.model.Users;
 import com.example.csci318.hotelbooking.repository.BookingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.rmi.RemoteException;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,6 +19,8 @@ public class BookingService {
     private RoomService roomService;
     @Autowired
     private UserService userService;
+    @Autowired
+    private HotelService hotelService;
 
     // Get all bookings
     public List<Booking> getAllBookings() {
@@ -35,22 +37,28 @@ public class BookingService {
         Room room = roomService.getRoomById(booking.getRoom().getId())
                 .orElseThrow(() -> new RuntimeException("Room not found"));
 
-        User user = userService.getUserById(booking.getUser().getId())
+        Users user = userService.getUserById(booking.getUser().getId())
                 .orElseThrow(() -> new RuntimeException("User not found"));
+
+        Hotel hotel = hotelService.getHotelById(booking.getHotel().getId())
+                .orElseThrow(() -> new RuntimeException("Hotel not found"));
 
         // Check if the room is available
         if(!room.isAvailability()){
             throw new RuntimeException("Room is not available for booking");
         }
 
+        // register the event that user has made the booking
+        user.makeBooking(hotel.getName(), room.getRoomNumber());
+
         // If the room is available, set the room as unavailable and register the event
         room.setAvailability(false);
-        room.isBooked();
-
-        // register the event that user has made the booking
-        user.makeBooking();
-
+        room.isBooked(user.getName());
         roomService.updateRoom(room.getId(), room);
+
+        // register the hotel event
+
+        hotel.makeBooking(user.getName());
 
         return bookingRepository.save(booking);
     }

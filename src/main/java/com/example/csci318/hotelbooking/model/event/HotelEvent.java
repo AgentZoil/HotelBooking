@@ -1,14 +1,12 @@
 package com.example.csci318.hotelbooking.model.event;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+import org.springframework.aot.generate.GeneratedTypeReference;
 
 @Entity
 public class HotelEvent {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long Id;
     @Column
     private String event_name;
@@ -20,6 +18,8 @@ public class HotelEvent {
     private String description;
     @Column
     private double pricePerNight;
+    @Column
+    private String userName;
 
     public HotelEvent() {
     }
@@ -60,6 +60,14 @@ public class HotelEvent {
         return pricePerNight;
     }
 
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
     public void setPricePerNight(double pricePerNight) {
         this.pricePerNight = pricePerNight;
     }
@@ -67,11 +75,13 @@ public class HotelEvent {
     @Override
     public String toString() {
         return "HotelEvent{" +
-                "event_name='" + event_name + '\'' +
+                "Id=" + Id +
+                ", event_name='" + event_name + '\'' +
                 ", name='" + name + '\'' +
                 ", location='" + location + '\'' +
                 ", description='" + description + '\'' +
                 ", pricePerNight=" + pricePerNight +
+                ", userName='" + userName + '\'' +
                 '}';
     }
 }

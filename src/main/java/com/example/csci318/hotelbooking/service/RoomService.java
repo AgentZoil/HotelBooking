@@ -67,11 +67,11 @@ public class RoomService {
         });
     }
 
-    public void bookRoom(long Id){
-        Room room = roomRepository.findById(Id).orElseThrow(RuntimeException::new);
-        room.isBooked();
-        roomRepository.save(room);
-    }
+//    public void bookRoom(long Id){
+//        Room room = roomRepository.findById(Id).orElseThrow(RuntimeException::new);
+//        room.isBooked();
+//        roomRepository.save(room);
+//    }
 
 //     get the hotel information
     public Hotel getHotelInfo(Long id){

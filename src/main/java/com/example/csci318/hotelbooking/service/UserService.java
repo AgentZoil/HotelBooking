@@ -1,6 +1,6 @@
 package com.example.csci318.hotelbooking.service;
 
-import com.example.csci318.hotelbooking.model.User;
+import com.example.csci318.hotelbooking.model.Users;
 import com.example.csci318.hotelbooking.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -15,19 +15,19 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
-    public List<User> getAllUsers() {
+    public List<Users> getAllUsers() {
         return userRepository.findAll();
     }
 
-    public Optional<User> getUserById(Long id) {
+    public Optional<Users> getUserById(Long id) {
         return userRepository.findById(id);
     }
 
-    public User createUser(User user) {
+    public Users createUser(Users user) {
         return userRepository.save(user);
     }
 
-    public ResponseEntity<User> updateUser(Long id, User userDetails) {
+    public ResponseEntity<Users> updateUser(Long id, Users userDetails) {
         return userRepository.findById(id)
                 .map(user -> {
                     user.setName(userDetails.getName());

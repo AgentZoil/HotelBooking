@@ -114,13 +114,15 @@ public class Room extends AbstractAggregateRoot<Room> {
         return Objects.hash(id, roomNumber, type, price, availability, hotel);
     }
 
-    public void isBooked(){
+    public void isBooked(String userName){
         RoomEvent roomEvent = new RoomEvent();
         roomEvent.setAvailability(false);
         roomEvent.setRoomNumber(this.getRoomNumber());
         roomEvent.setType(this.getType());
         roomEvent.setPrice(this.getPrice());
-        roomEvent.setEventName("This room has been booked");
+        roomEvent.setEventName("This room has been booked by: " + userName);
+
+        System.out.println(roomEvent.toString());
 
         registerEvent(roomEvent);
     }
