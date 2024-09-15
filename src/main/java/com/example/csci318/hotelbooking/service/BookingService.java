@@ -5,6 +5,7 @@ import com.example.csci318.hotelbooking.model.Hotel;
 import com.example.csci318.hotelbooking.model.Room;
 import com.example.csci318.hotelbooking.model.Users;
 import com.example.csci318.hotelbooking.repository.BookingRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -33,6 +34,7 @@ public class BookingService {
     }
 
     // Create a new booking
+    @Transactional
     public Booking createBooking(Booking booking) {
         Room room = roomService.getRoomById(booking.getRoom().getId())
                 .orElseThrow(() -> new RuntimeException("Room not found"));
@@ -50,6 +52,7 @@ public class BookingService {
 
         // register the event that user has made the booking
         user.makeBooking(hotel.getName(), room.getRoomNumber());
+        userService.updateUser(user.getId(), user);
 
         // If the room is available, set the room as unavailable and register the event
         room.setAvailability(false);
@@ -59,6 +62,7 @@ public class BookingService {
         // register the hotel event
 
         hotel.makeBooking(user.getName());
+        hotelService.updateHotel(hotel.getId(), hotel);
 
         return bookingRepository.save(booking);
     }
@@ -75,6 +79,7 @@ public class BookingService {
     }
 
     // Delete a booking
+    @Transactional
     public Optional<Void> deleteBooking(Long id) {
         // find the booking
         Booking b = getBookingById(id)

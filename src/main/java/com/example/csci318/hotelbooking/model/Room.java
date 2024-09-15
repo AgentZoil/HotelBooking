@@ -10,11 +10,9 @@ import java.util.Objects;
 
 @Entity
 public class Room extends AbstractAggregateRoot<Room> {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String roomNumber;
     private String type;
     private double price;

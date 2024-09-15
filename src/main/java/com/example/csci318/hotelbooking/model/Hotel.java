@@ -22,7 +22,7 @@ public class Hotel extends AbstractAggregateRoot<Hotel> {
     private String description;
     private double pricePerNight;
 
-    @OneToMany(mappedBy = "hotel", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "hotel", orphanRemoval = true)
     @JsonManagedReference  // This prevents the infinite recursion
     private List<Room> rooms; // create a list of rooms
     private List<Long> availableRooms = new ArrayList<>(); // create a list of available rooms

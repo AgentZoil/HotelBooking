@@ -80,9 +80,6 @@ public class Users extends AbstractAggregateRoot<Users> {
     }
 
     public void makeBooking(String hoteName, String roomNumber) {
-        // TEST
-        System.out.println("User is making a booking");
-
         UserEvent userEvent = new UserEvent();
         userEvent.setEventName("The user has made a booking at " + hoteName + " room number: " + roomNumber);
         userEvent.setEmail(this.getEmail());
