@@ -112,7 +112,7 @@ public class Hotel extends AbstractAggregateRoot<Hotel> {
         return Objects.hash(id, name, location, description, pricePerNight);
     }
 
-    public void makeBooking(String userName){
+    public HotelEvent makeBooking(String userName){
         HotelEvent hotelEvent = new HotelEvent();
         hotelEvent.setUserName(userName);
         hotelEvent.setName(this.getName());
@@ -125,6 +125,7 @@ public class Hotel extends AbstractAggregateRoot<Hotel> {
         System.out.println(hotelEvent.toString());
 
         registerEvent(hotelEvent);
+        return hotelEvent;
     }
 
     @Override

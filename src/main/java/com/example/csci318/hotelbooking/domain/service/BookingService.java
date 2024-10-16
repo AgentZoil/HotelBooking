@@ -68,8 +68,8 @@ public class BookingService {
         hotel.makeBooking(user.getName());
 
         // publish event using kafka
-        BookingEvent event = new BookingEvent(booking.getHotel().getName(), booking.getUser().getName(), booking.getRoom().getRoomNumber(), booking.getCheckInDate(), booking.getCheckOutDate());
-        kafkaProducer.sendBookingEvent(event);
+//        BookingEvent event = new BookingEvent(booking.getHotel().getName(), booking.getUser().getName(), booking.getRoom().getRoomNumber(), booking.getCheckInDate(), booking.getCheckOutDate());
+        kafkaProducer.sendBookingEvent(hotel.makeBooking(user.getName()));
 
 
         hotelService.updateHotel(hotel.getId(), hotel);
