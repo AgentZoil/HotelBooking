@@ -1,9 +1,11 @@
 package com.example.csci318.hotelbooking.domain.service;
 
+import com.example.csci318.hotelbooking.domain.event.BookingEvent;
 import com.example.csci318.hotelbooking.domain.model.Booking;
 import com.example.csci318.hotelbooking.domain.model.Hotel;
 import com.example.csci318.hotelbooking.domain.model.Room;
 import com.example.csci318.hotelbooking.domain.model.Users;
+import com.example.csci318.hotelbooking.infrastructure.messaging.KafkaProducer;
 import com.example.csci318.hotelbooking.infrastructure.repository.BookingRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +24,9 @@ public class BookingService {
     private UserService userService;
     @Autowired
     private HotelService hotelService;
+
+    @Autowired
+    KafkaProducer kafkaProducer;
 
     // Get all bookings
     public List<Booking> getAllBookings() {
@@ -60,8 +65,13 @@ public class BookingService {
         roomService.updateRoom(room.getId(), room);
 
         // register the hotel event
-
         hotel.makeBooking(user.getName());
+
+        // publish event using kafka
+        BookingEvent event = new BookingEvent(booking.getHotel().getName(), booking.getUser().getName(), booking.getRoom().getRoomNumber(), booking.getCheckInDate(), booking.getCheckOutDate());
+        kafkaProducer.sendBookingEvent(event);
+
+
         hotelService.updateHotel(hotel.getId(), hotel);
 
 //        return bookingRepository.save(booking);

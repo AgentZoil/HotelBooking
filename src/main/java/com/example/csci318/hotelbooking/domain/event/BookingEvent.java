@@ -25,6 +25,14 @@ public class BookingEvent {
     public BookingEvent() {
     }
 
+    public BookingEvent(String hotelName, String userName, String roomNumber, Date checkInDate, Date checkOutDate) {
+        this.hotelName = hotelName;
+        this.userName = userName;
+        this.roomNumber = roomNumber;
+        this.checkInDate = checkInDate;
+        this.checkOutDate = checkOutDate;
+    }
+
     public Date getCheckOutDate() {
         return checkOutDate;
     }
