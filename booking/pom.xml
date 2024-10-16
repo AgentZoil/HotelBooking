@@ -13,7 +13,7 @@
     <properties>
         <java.version>21</java.version>
         <spring.boot.version>3.2.0</spring.boot.version>
-        <spring.cloud.stream.version>4.0.1</spring.cloud.stream.version>
+        <spring.cloud.version>2023.0.3</spring.cloud.version> <!-- Use Spring Cloud 2023.0.3 -->
     </properties>
 
     <dependencies>
@@ -67,6 +67,14 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>10</source>
+                    <target>10</target>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
 
@@ -82,7 +90,7 @@
             <dependency>
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-dependencies</artifactId>
-                <version>${spring.cloud.stream.version}</version>
+                <version>${spring.cloud.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
