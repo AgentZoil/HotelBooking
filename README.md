@@ -70,6 +70,18 @@ You should see a topic name `booking-events`. You can read data in the `booking-
 ```shell
 c:\kafka\bin\windows\kafka-console-consumer.bat --bootstrap-server localhost:9092 --topic booking-events --from-beginning
 ```
+#### REST Request for Interactive Query
+
+Run the DemoClient and get the changing query results: 
+
+(Linux/MacOS)
+```shell
+curl -X GET -H "Content-Type:application/json" http://localhost:8788/queries/findAllBookingsByCity
+```
+(windows)
+```shell
+curl -X GET -H "Content-Type:application/json" http://localhost:8788/queries/findAllBookingsByCity
+```
 
 ## H2 Console
 The console http://localhost:8080/h2-console/. To log on, change the value in the JDBC URL entry to jdbc:h2:mem:testdb.
