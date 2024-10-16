@@ -11,6 +11,7 @@
 	<groupId>com.example.csci318</groupId>
 	<artifactId>hotelbooking</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
+	<packaging>pom</packaging>
 	<name>hotelbooking</name>
 	<description>CSCI318 project - hotel booking</description>
 	<url/>
@@ -20,6 +21,9 @@
 	<developers>
 		<developer/>
 	</developers>
+	<modules>
+		<module>booking</module>
+	</modules>
 	<scm>
 		<connection/>
 		<developerConnection/>
