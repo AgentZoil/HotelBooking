@@ -49,6 +49,27 @@ C:\kafka\bin\windows\zookeeper-server-start.bat C:\kafka\config\zookeeper.proper
 ```bash
 C:\kafka\bin\windows\kafka-server-start.bat C:\kafka\config\server.properties
 ```
+### View Kafka Topics
+After running the `HotelBookingApplication`'s main class, check the Kafka topics with the following command:
+
+(Linux/MacOS)
+```shell
+./bin/kafka-topics.sh --bootstrap-server=localhost:9092 --list
+```
+(Windows)
+```shell
+C:\kafka\bin\windows\kafka-topics.bat --bootstrap-server=localhost:9092 --list
+```
+You should see a topic name `booking-topic`. You can read data in the `booking-topic` topic:
+
+(Linux/MacOS)
+```shell
+./bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic booking-topic --from-beginning
+```
+(Windows)
+```shell
+c:\kafka\bin\windows\kafka-console-consumer.bat --bootstrap-server localhost:9092 --topic booking-topic --from-beginning
+```
 
 ## H2 Console
 The console http://localhost:8080/h2-console/. To log on, change the value in the JDBC URL entry to jdbc:h2:mem:testdb.
