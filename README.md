@@ -76,11 +76,11 @@ Run the DemoClient and get the changing query results:
 
 (Linux/MacOS)
 ```shell
-curl -X GET -H "Content-Type:application/json" http://localhost:8788/queries/findAllBookingsByCity
+curl -X GET -H "Content-Type:application/json" http://localhost:8081/queries/findAllBookingsByHotel
 ```
 (windows)
 ```shell
-curl -X GET -H "Content-Type:application/json" http://localhost:8788/queries/findAllBookingsByCity
+curl -X GET -H "Content-Type:application/json" http://localhost:8788/queries/findAllBookingsByHotel
 ```
 
 ## H2 Console
