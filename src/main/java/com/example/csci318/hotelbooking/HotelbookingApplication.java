@@ -1,12 +1,11 @@
 package com.example.csci318.hotelbooking;
 
-import com.example.csci318.hotelbooking.model.Hotel;
-import com.example.csci318.hotelbooking.model.Room;
-import com.example.csci318.hotelbooking.repository.HotelRepository;
-import com.example.csci318.hotelbooking.repository.RoomRepository;
-import com.example.csci318.hotelbooking.service.HotelService;
+import com.example.csci318.hotelbooking.domain.model.Hotel;
+import com.example.csci318.hotelbooking.domain.model.Room;
+import com.example.csci318.hotelbooking.infrastructure.repository.HotelRepository;
+import com.example.csci318.hotelbooking.infrastructure.repository.RoomRepository;
+import com.example.csci318.hotelbooking.domain.service.HotelService;
 import org.springframework.boot.CommandLineRunner;
-import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.annotation.Bean;
