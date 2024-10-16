@@ -60,15 +60,27 @@ After running the `HotelBookingApplication`'s main class, check the Kafka topics
 ```shell
 C:\kafka\bin\windows\kafka-topics.bat --bootstrap-server=localhost:9092 --list
 ```
-You should see a topic name `booking-topic`. You can read data in the `booking-topic` topic:
+You should see a topic name `booking-events`. You can read data in the `booking-events` topic:
 
 (Linux/MacOS)
 ```shell
-./bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic booking-topic --from-beginning
+./bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic booking-events --from-beginning
 ```
 (Windows)
 ```shell
-c:\kafka\bin\windows\kafka-console-consumer.bat --bootstrap-server localhost:9092 --topic booking-topic --from-beginning
+c:\kafka\bin\windows\kafka-console-consumer.bat --bootstrap-server localhost:9092 --topic booking-events --from-beginning
+```
+#### REST Request for Interactive Query
+
+Run the DemoClient and get the changing query results: 
+
+(Linux/MacOS)
+```shell
+curl -X GET -H "Content-Type:application/json" http://localhost:8081/queries/findAllBookingsByHotel
+```
+(windows)
+```shell
+curl -X GET -H "Content-Type:application/json" http://localhost:8788/queries/findAllBookingsByHotel
 ```
 
 ## H2 Console
