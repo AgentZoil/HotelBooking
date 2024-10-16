@@ -18,7 +18,7 @@ public class KafkaProducer {
     public void sendBookingEvent(HotelEvent event){
         try {
             String eventJson = objectMapper.writeValueAsString(event);
-            kafkaTemplate.send("booking-topic", eventJson);
+            kafkaTemplate.send("booking-events", eventJson);
         } catch (JsonProcessingException e) {
             e.printStackTrace();
         }

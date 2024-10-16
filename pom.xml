@@ -23,6 +23,7 @@
 	</developers>
 	<modules>
 		<module>booking</module>
+		<module>analyticsms</module>
 	</modules>
 	<scm>
 		<connection/>
