@@ -1,6 +1,7 @@
 package com.example.csci318.hotelbooking.model;
 
 //import com.example.csci318.hotelbooking.model.event.BookingEvent;
+import com.example.csci318.hotelbooking.model.event.BookingEvent;
 import jakarta.persistence.*;
 import org.springframework.data.domain.AbstractAggregateRoot;
 
@@ -110,5 +111,18 @@ public class Booking extends AbstractAggregateRoot<Booking> {
     @Override
     public int hashCode() {
         return Objects.hash(id, user, hotel, room, checkInDate, checkOutDate);
+    }
+
+    public void makeBooking(String userName, String hotelName, String roomNumber){
+        BookingEvent bookingEvent = new BookingEvent();
+        bookingEvent.setEventName(String.format("%s has booked room %s at hotel %s", userName, roomNumber, hotelName));
+        bookingEvent.setRoomNumber(roomNumber);
+        bookingEvent.setCheckInDate(this.getCheckInDate());
+        bookingEvent.setHotelName(hotelName);
+        bookingEvent.setUserName(userName);
+        bookingEvent.setCheckOutDate(this.getCheckOutDate());
+        System.out.println(bookingEvent.toString());
+
+        registerEvent(bookingEvent);
     }
 }
