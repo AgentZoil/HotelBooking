@@ -1,7 +1,7 @@
 package com.example.csci318.hotelbooking.domain.model;
 
 //import com.example.csci318.hotelbooking.model.event.BookingEvent;
-import com.example.csci318.hotelbooking.domain.model.event.BookingEvent;
+import com.example.csci318.hotelbooking.domain.event.BookingEvent;
 import jakarta.persistence.*;
 import org.springframework.data.domain.AbstractAggregateRoot;
 

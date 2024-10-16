@@ -1,9 +1,9 @@
 package com.example.csci318.hotelbooking.domain.service;
 
-import com.example.csci318.hotelbooking.domain.model.event.BookingEvent;
-import com.example.csci318.hotelbooking.domain.model.event.HotelEvent;
-import com.example.csci318.hotelbooking.domain.model.event.RoomEvent;
-import com.example.csci318.hotelbooking.domain.model.event.UserEvent;
+import com.example.csci318.hotelbooking.domain.event.BookingEvent;
+import com.example.csci318.hotelbooking.domain.event.HotelEvent;
+import com.example.csci318.hotelbooking.domain.event.RoomEvent;
+import com.example.csci318.hotelbooking.domain.event.UserEvent;
 import com.example.csci318.hotelbooking.infrastructure.repository.BookingEventRepository;
 import com.example.csci318.hotelbooking.infrastructure.repository.HotelEventRepository;
 import com.example.csci318.hotelbooking.infrastructure.repository.RoomEventRepository;

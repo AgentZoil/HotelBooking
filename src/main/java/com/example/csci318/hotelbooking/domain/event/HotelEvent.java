@@ -1,4 +1,4 @@
-package com.example.csci318.hotelbooking.domain.model.event;
+package com.example.csci318.hotelbooking.domain.event;
 
 import jakarta.persistence.*;
 import org.springframework.aot.generate.GeneratedTypeReference;

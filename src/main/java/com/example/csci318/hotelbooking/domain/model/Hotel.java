@@ -1,6 +1,6 @@
 package com.example.csci318.hotelbooking.domain.model;
 
-import com.example.csci318.hotelbooking.domain.model.event.HotelEvent;
+import com.example.csci318.hotelbooking.domain.event.HotelEvent;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.*;
