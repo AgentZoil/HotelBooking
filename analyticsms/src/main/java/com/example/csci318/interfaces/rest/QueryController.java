@@ -2,17 +2,17 @@ package com.example.csci318.interfaces.rest;
 
 import com.example.csci318.analyticsms.applicationservice.InteractiveQuery;
 import com.example.csci318.interfaces.rest.dto.BookingsByHotel;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Controller    // This means that this class is a Controller
+@RestController
 @RequestMapping("/queries")
 public class QueryController {
 
+    @Autowired
     private final InteractiveQuery interactiveQuery;
 
     public QueryController(InteractiveQuery interactiveQuery) {
@@ -23,5 +23,11 @@ public class QueryController {
     @ResponseBody
     public List<BookingsByHotel> findAllBookingsByCity() {
         return interactiveQuery.getAllBookingsByHotel();
+    }
+
+    @GetMapping("/testEndpoint")
+    @ResponseBody
+    public String testEndpoint() {
+        return "Routing works!";
     }
 }
