@@ -18,7 +18,6 @@ public class StreamProcessor {
     @Bean
     public Consumer<KStream<String, BookingEvent>> process() {
         return inputStream -> {
-            // Aggregate total bookings by room type
             KTable<String, Long> totalBookings = inputStream
                     .map((key, value) -> KeyValue.pair(value.getBookingEventData().getHotelName(), 1L))
                     .groupByKey(Grouped.with(Serdes.String(), Serdes.Long()))
