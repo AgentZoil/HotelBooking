@@ -80,7 +80,7 @@ curl -X GET -H "Content-Type:application/json" http://localhost:8081/queries/fin
 ```
 (windows)
 ```shell
-curl -X GET -H "Content-Type:application/json" http://localhost:8788/queries/findAllBookingsByHotel
+curl -X GET -H "Content-Type:application/json" http://localhost:8081/queries/findAllBookingsByHotel
 ```
 
 ## H2 Console
