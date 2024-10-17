@@ -1,4 +1,4 @@
-package com.example.csci318.interfaces.rest.dto;
+package com.example.csci318.analyticsms.interfaces.rest.dto;
 
 public class BookingsByHotel {
     private String hotelName;

@@ -1,10 +1,12 @@
-package com.example.csci318.interfaces.rest;
+package com.example.csci318.analyticsms.interfaces.rest;
 
 import com.example.csci318.analyticsms.applicationservice.InteractiveQuery;
-import com.example.csci318.interfaces.rest.dto.BookingsByHotel;
+import com.example.csci318.analyticsms.interfaces.rest.dto.BookingsByHotel;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
@@ -15,6 +17,7 @@ public class QueryController {
     @Autowired
     private final InteractiveQuery interactiveQuery;
 
+    @Autowired
     public QueryController(InteractiveQuery interactiveQuery) {
         this.interactiveQuery = interactiveQuery;
     }
@@ -26,7 +29,6 @@ public class QueryController {
     }
 
     @GetMapping("/testEndpoint")
-    @ResponseBody
     public String testEndpoint() {
         return "Routing works!";
     }

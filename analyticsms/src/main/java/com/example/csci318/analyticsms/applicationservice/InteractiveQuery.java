@@ -1,6 +1,6 @@
 package com.example.csci318.analyticsms.applicationservice;
 
-import com.example.csci318.interfaces.rest.dto.BookingsByHotel;
+import com.example.csci318.analyticsms.interfaces.rest.dto.BookingsByHotel;
 import org.apache.kafka.streams.KeyValue;
 import org.apache.kafka.streams.state.KeyValueIterator;
 import org.apache.kafka.streams.state.QueryableStoreTypes;
